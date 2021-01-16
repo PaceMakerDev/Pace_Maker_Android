@@ -30,8 +30,8 @@ class AuthActivity : AppCompatActivity() {
             .baseUrl(BASE_URL)
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
-        Log.d(TAG, "built retrofit");
         val service = retrofit.create(AuthService::class.java)
+        // dummy data
         val signup = SignUpDto("jtlsan", "software", "San", "1234")
         val requestSingup = service.signUpUser(signup)
         Log.d(TAG, "request : " + requestSingup.request().url)
@@ -48,15 +48,16 @@ class AuthActivity : AppCompatActivity() {
                 }
                 else {
                     //code 404
-                    //서버 다운?
+                    //not found.
                 }
 
             }
 
             override fun onFailure(call: Call<UserDto>, t: Throwable) {
+                //응답 받지 못함. 서버다운?
                 Log.d(TAG, "Failed")
             }
-        })      //async로 바꾸기
+        })
 
     }
 }
