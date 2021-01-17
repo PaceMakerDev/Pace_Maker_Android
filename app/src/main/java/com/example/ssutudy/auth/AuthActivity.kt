@@ -2,9 +2,9 @@ package com.example.ssutudy.auth
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
+import com.example.ssutudy.auth.enums.AuthFragments
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import retrofit2.Retrofit

@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
-import kotlinx.android.synthetic.main.fragment_auth_main.*
+import com.example.ssutudy.auth.enums.AuthFragments
 import kotlinx.android.synthetic.main.fragment_auth_main.view.*
 
 class AuthMainFragment : Fragment() {
