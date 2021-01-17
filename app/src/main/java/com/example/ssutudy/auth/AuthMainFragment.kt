@@ -37,6 +37,10 @@ class AuthMainFragment : Fragment() {
             authActivity.setFragment(AuthFragments.LOGIN)
         }
 
+        view.auth_button_signup.setOnClickListener {
+            authActivity.setFragment(AuthFragments.SIGNUP)
+        }
+
 
         return view;
     }

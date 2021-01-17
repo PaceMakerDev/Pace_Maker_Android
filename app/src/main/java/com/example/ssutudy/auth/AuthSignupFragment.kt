@@ -1,8 +1,6 @@
 package com.example.ssutudy.auth
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +8,9 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
+import kotlinx.android.synthetic.main.fragment_auth_signup.view.*
 
-class AuthLoginFragment : Fragment() {
+class AuthSignupFragment : Fragment() {
     companion object {
         lateinit private var authActivity: AuthActivity
     }
@@ -20,20 +19,19 @@ class AuthLoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_auth_login, container, false)
+        val view = inflater.inflate(R.layout.fragment_auth_signup, container, false)
 
-        view.auth_button_signin.setOnClickListener {
-            val id = view.auth_edittext_id.text.toString()
-            val password = view.auth_edittext_pw.text.toString()
-            val signinDto = SigninDto(id, password)
-            authActivity.requestSignin(signinDto)
-
+        view.auth_button_signin_from_signup.setOnClickListener {
 
         }
 
-        view.auth_edittext_pw.setOnEditorActionListener { textView, i, keyEvent ->
+        view.auth_button_student_card.setOnClickListener {
+
+        }
+
+        view.auth_edittext_signup_pw_check.setOnEditorActionListener { textView, i, keyEvent ->
             if(i == EditorInfo.IME_ACTION_DONE) {
-                view.auth_button_signin.callOnClick()
+                view.auth_button_signin_from_signup.callOnClick()
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -45,5 +43,4 @@ class AuthLoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         authActivity = activity as AuthActivity
     }
-
 }

@@ -40,33 +40,6 @@ class AuthActivity : AppCompatActivity() {
             .build()
         service = retrofit.create(AuthService::class.java)
 
-        // dummy data
-        val signup = SignUpDto("jtlsan", "software", "San", "1234")
-        val requestSingup = service.signupUser(signup)
-        Log.d(TAG, "request : " + requestSingup.request().url)
-        val response = requestSingup.enqueue(object : Callback<UserDto> {
-            override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
-                if(response.code() == 201) {
-                    //회원가입 성공
-                }
-                else if (response.code() == 400) {
-                    //사용자 입력이 잘못된 항목이 존재("요청 바디 형식이 잘못됐을 경우")
-                }
-                else if (response.code() == 409){
-                    //아이디가 중복일 경우
-                }
-                else {
-                    //code 404
-                    //not found.
-                }
-
-            }
-
-            override fun onFailure(call: Call<UserDto>, t: Throwable) {
-                //응답 받지 못함. 서버다운?
-                Log.d(TAG, "Failed")
-            }
-        })
 
     }
 
@@ -81,31 +54,82 @@ class AuthActivity : AppCompatActivity() {
                     replace(R.id.auth_main_frame, AuthLoginFragment())
                     commit()
                 }
+                AuthFragments.SIGNUP -> {
+                    replace(R.id.auth_main_frame, AuthSignupFragment())
+                    commit()
+                }
             }
         }
     }
 
     fun requestSignin(signinDto: SigninDto) {
         val requestLogin = service.signinUser(signinDto)
-        requestLogin.enqueue(object : Callback<UserDto> {
-            override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
-                Log.d(TAG, "code : " + response.code() )
-                if(response.code() == 200) {
-                    //로그인성공
-                    Log.d(TAG, "success" )
-                }
-                else if (response.code() == 400) {
-                    //요청바디형식이 잘못됨
-                    Log.d(TAG, "요청바디형식" )
-                }
-                else if (response.code() == 403) {
-                    //아이디나 비밀번호 틀림
-                    Log.d(TAG, "아이디비번틀림" )
+        requestLogin.enqueue(object : Callback<AuthResponseDto> {
+            override fun onResponse(call: Call<AuthResponseDto>, response: Response<AuthResponseDto>) {
+                when(response.code()) {
+                    200 -> {
+                        //로그인성공
+                        val editor = getSharedPreferences("auth", MODE_PRIVATE).edit()
+                        response.body()!!.let {
+                            editor.putString("access_token", it.accessToken)
+                            editor.putString("user_id", it.user.id)
+                            editor.putString("user_name", it.user.name)
+                            editor.putString("user_major", it.user.major)
+                        }
+                        editor.apply()
+                    }
+                    400 -> {
+                        //요청바디형식이 잘못됨
+                    }
+                    403 -> {
+                        //아이디나 비밀번호 틀림
+                    }
+                    else -> {
+                        //서버 다운
+                    }
                 }
             }
 
-            override fun onFailure(call: Call<UserDto>, t: Throwable) {
+            override fun onFailure(call: Call<AuthResponseDto>, t: Throwable) {
                 Log.d(TAG, "onFailure")
+                Log.d(TAG, t.localizedMessage)
+            }
+        })
+    }
+
+    fun requestSignup(signupDto : SignUpDto) {
+        val requestSignup = service.signupUser(signupDto)
+        requestSignup.enqueue(object : Callback<AuthResponseDto> {
+            override fun onResponse(
+                call: Call<AuthResponseDto>,
+                response: Response<AuthResponseDto>
+            ) {
+                when (response.code()) {
+                    201 -> {
+                        //회원가입성공
+                        val editor = getSharedPreferences("auth", MODE_PRIVATE).edit()
+                        response.body()!!.let {
+                            editor.putString("access_token", it.accessToken)
+                            editor.putString("user_id", it.user.id)
+                            editor.putString("user_name", it.user.name)
+                            editor.putString("user_major", it.user.major)
+                        }
+                        editor.apply()
+                    }
+                    400 -> {
+                        // 요청 바디 형식 오류
+                    }
+                    409 -> {
+                        //아이디 중복
+                    }
+                    else -> {
+                        //서버다운
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<AuthResponseDto>, t: Throwable) {
+                //서버다운?
             }
         })
     }

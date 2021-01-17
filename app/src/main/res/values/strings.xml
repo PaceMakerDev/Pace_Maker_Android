@@ -8,9 +8,14 @@
     <string name="auth_missing_info">아이디 혹은 비밀번호를 잊으셨나요?</string>
     <string name="auth_login">로그인</string>
     <string name="auth_signup">회원가입</string>
-    <string name="auth_hint_id">아이디</string>
-    <string name="auth_hint_pw">비밀번호</string>
+    <string name="auth_id">아이디</string>
+    <string name="auth_pw">비밀번호</string>
+    <string name="auth_major">전공</string>
+    <string name="auth_name">이름</string>
+    <string name="auth_pw_check">비밀번호 확인</string>
+    <string name="auth_student_card">학생증 인증</string>
     <string name="auth_signin">SIGN IN</string>
+
 
 </resources>
 
