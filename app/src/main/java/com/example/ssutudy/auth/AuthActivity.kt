@@ -19,21 +19,30 @@ class AuthActivity : AppCompatActivity() {
         //private final val BASE_URL = "https://skfk0135.stoplight.io/mocks/skfk0135/ssutudy-api-spec/4827703/"
         private final val BASE_URL = "http://10.0.2.2:8000/"
         val TAG = "Auth"
+        lateinit private var mainFragment : AuthMainFragment
+        lateinit private var retrofit: Retrofit
+        lateinit private var service : AuthService
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+        mainFragment = AuthMainFragment()
+
+        setFragment(AuthFragments.MAIN)
+
+        // retorfit setting
         val contentType = "application/json".toMediaType()
-        val retrofit = Retrofit.Builder()
+        retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
-        val service = retrofit.create(AuthService::class.java)
+        service = retrofit.create(AuthService::class.java)
+
         // dummy data
         val signup = SignUpDto("jtlsan", "software", "San", "1234")
-        val requestSingup = service.signUpUser(signup)
+        val requestSingup = service.signupUser(signup)
         Log.d(TAG, "request : " + requestSingup.request().url)
         val response = requestSingup.enqueue(object : Callback<UserDto> {
             override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
@@ -59,5 +68,45 @@ class AuthActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun setFragment(frag : AuthFragments) {
+        supportFragmentManager.beginTransaction().apply {
+            when(frag) {
+                AuthFragments.MAIN -> {
+                    replace(R.id.auth_main_frame, mainFragment)
+                    commit()
+                }
+                AuthFragments.LOGIN -> {
+                    replace(R.id.auth_main_frame, AuthLoginFragment())
+                    commit()
+                }
+            }
+        }
+    }
+
+    fun requestSignin(signinDto: SigninDto) {
+        val requestLogin = service.signinUser(signinDto)
+        requestLogin.enqueue(object : Callback<UserDto> {
+            override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
+                Log.d(TAG, "code : " + response.code() )
+                if(response.code() == 200) {
+                    //로그인성공
+                    Log.d(TAG, "success" )
+                }
+                else if (response.code() == 400) {
+                    //요청바디형식이 잘못됨
+                    Log.d(TAG, "요청바디형식" )
+                }
+                else if (response.code() == 403) {
+                    //아이디나 비밀번호 틀림
+                    Log.d(TAG, "아이디비번틀림" )
+                }
+            }
+
+            override fun onFailure(call: Call<UserDto>, t: Throwable) {
+                Log.d(TAG, "onFailure")
+            }
+        })
     }
 }

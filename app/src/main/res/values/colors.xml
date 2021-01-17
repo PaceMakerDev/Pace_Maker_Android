@@ -5,4 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="mainTheme">#0EBEAF</color>
+    <color name="inputBox">#8E8E93</color>
+
 </resources>

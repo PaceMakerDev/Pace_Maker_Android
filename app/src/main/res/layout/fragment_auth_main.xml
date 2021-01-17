@@ -10,7 +10,7 @@
         android:layout_height="150dp"
         android:id="@+id/auth_imageview_logo"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="300dp"
         android:src="@drawable/ssutudy_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,24 +28,24 @@
 
         <Button
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:id="@+id/auth_button_login"
-            android:background="@drawable/button_auth_login"
+            android:background="@drawable/button_filled_maintheme"
             android:layout_gravity="center_horizontal"
             android:textColor="#ffffff"
             android:text="@string/auth_login"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
 
         <Button
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:id="@+id/auth_button_signup"
-            android:background="@drawable/button_auth_signup"
+            android:background="@drawable/button_line_maintheme"
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="15dp"
             android:textColor="@color/mainTheme"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="@string/auth_signup"/>
 
         <Button
@@ -55,7 +55,7 @@
             android:background="#ffffff"
             android:text="@string/auth_missing_info"
             android:textColor="#8E8E93"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
 
 
 
