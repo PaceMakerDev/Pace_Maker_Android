@@ -34,7 +34,8 @@
             android:textSize="15sp"
             android:maxLines="1"
             android:paddingHorizontal="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:inputType="textNoSuggestions" />
 
         <EditText
             android:layout_width="300dp"

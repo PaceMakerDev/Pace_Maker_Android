@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
@@ -25,6 +26,14 @@ class AuthLoginFragment : Fragment() {
             val password = view.auth_edittext_pw.text.toString()
             val signinDto = SigninDto(id, password)
             authActivity.requestSignin(signinDto)
+        }
+
+        view.auth_edittext_pw.setOnEditorActionListener { textView, i, keyEvent ->
+            if(i == EditorInfo.IME_ACTION_DONE) {
+                view.auth_button_signin.callOnClick()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
         return view
     }
