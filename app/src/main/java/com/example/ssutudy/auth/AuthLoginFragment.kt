@@ -23,7 +23,7 @@ class AuthLoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_auth_login, container, false)
 
         view.auth_button_signin.setOnClickListener {
-            val id = view.auth_edittext_id.text.toString()
+            val id = view.auth_edittext_email.text.toString()
             val password = view.auth_edittext_pw.text.toString()
             val signinDto = SigninDto(id, password)
             authActivity.requestSignin(signinDto)
