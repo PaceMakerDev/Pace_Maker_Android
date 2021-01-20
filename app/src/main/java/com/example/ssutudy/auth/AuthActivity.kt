@@ -1,5 +1,6 @@
 package com.example.ssutudy.auth
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -45,8 +46,6 @@ class AuthActivity : AppCompatActivity() {
 
     fun setFragment(frag : AuthFragments) {
         supportFragmentManager.beginTransaction().apply {
-
-
             when(frag) {
                 AuthFragments.MAIN -> {
                     replace(R.id.auth_main_frame, mainFragment)

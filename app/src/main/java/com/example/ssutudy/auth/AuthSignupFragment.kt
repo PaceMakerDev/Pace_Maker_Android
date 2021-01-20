@@ -10,16 +10,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
-import com.example.ssutudy.auth.enums.AuthInputs
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.view.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.view.auth_signup_textview_error_email
-import java.util.regex.Pattern
 
 class AuthSignupFragment : Fragment() {
 
@@ -94,7 +91,7 @@ class AuthSignupFragment : Fragment() {
                 ret = checkEmail(input, messages.get(i), email)
             }
             view.auth_edittext_signup_pw.id -> {
-                val password = text.trim()
+                val password = text
                 ret = checkPassword(input, messages.get(i), password)
             }
             view.auth_edittext_signup_pw_check.id -> {
@@ -107,36 +104,32 @@ class AuthSignupFragment : Fragment() {
     }
 
     private fun checkEmail(input : EditText, message : TextView, email : String) : Boolean{
-        val emailValidation = Regex("^[_A-Za-z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-z]+$")
-
-        if(!email.matches(emailValidation)) {
+        if(AuthValidator.isEmailValid(email)) {
+            input.background = ResourcesCompat.getDrawable(resources, R.drawable.editview_auth_input, null)
+            message.text = ""
+            message.visibility = View.GONE
+            return true
+        }
+        else {
             input.background = ResourcesCompat.getDrawable(resources, R.drawable.editview_auth_input_redline, null)
             message.text = getString(R.string.auth_error_regex_email)
             message.visibility = View.VISIBLE
             return false
         }
-        else {
+    }
+
+    private fun checkPassword(input : EditText, message : TextView, password : String) : Boolean{
+        if(AuthValidator.isPasswwordValid(password)) {
             input.background = ResourcesCompat.getDrawable(resources, R.drawable.editview_auth_input, null)
             message.text = ""
             message.visibility = View.GONE
             return true
         }
-    }
-
-    private fun checkPassword(input : EditText, message : TextView, password : String) : Boolean{
-        val passwordValidation = Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{7,19}.$")
-
-        if(!password.matches(passwordValidation)) {
+        else {
             input.background = ResourcesCompat.getDrawable(resources, R.drawable.editview_auth_input_redline, null)
             message.text = getString(R.string.auth_error_regex_password)
             message.visibility = View.VISIBLE
             return false
-        }
-        else {
-            input.background = ResourcesCompat.getDrawable(resources, R.drawable.editview_auth_input, null)
-            message.text = ""
-            message.visibility = View.GONE
-            return true
         }
     }
 
@@ -154,7 +147,7 @@ class AuthSignupFragment : Fragment() {
         }
     }
 
-    inner class SignupClickListener(val view : View) : View.OnClickListener {
+    private inner class SignupClickListener(val view : View) : View.OnClickListener {
         var isGood = true
         override fun onClick(p0: View?) {
             resetInputs()
@@ -199,6 +192,7 @@ class AuthSignupFragment : Fragment() {
         }
 
         fun resetInputs() {
+            isGood = true
             val strings = ArrayList<String>()
             strings.add(getString(R.string.auth_name))
             strings.add(getString(R.string.auth_major))
