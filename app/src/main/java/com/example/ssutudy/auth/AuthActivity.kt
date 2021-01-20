@@ -45,16 +45,24 @@ class AuthActivity : AppCompatActivity() {
 
     fun setFragment(frag : AuthFragments) {
         supportFragmentManager.beginTransaction().apply {
+
+
             when(frag) {
                 AuthFragments.MAIN -> {
                     replace(R.id.auth_main_frame, mainFragment)
                     commit()
                 }
                 AuthFragments.LOGIN -> {
+                    setCustomAnimations(R.anim.from_right_to_center, R.anim.from_center_to_left, R.anim.from_left_to_center, R.anim.from_center_to_right)
+                    addToBackStack(null)
+                    setReorderingAllowed(true)
                     replace(R.id.auth_main_frame, AuthLoginFragment())
                     commit()
                 }
                 AuthFragments.SIGNUP -> {
+                    setCustomAnimations(R.anim.from_right_to_center, R.anim.from_center_to_left, R.anim.from_left_to_center, R.anim.from_center_to_right)
+                    addToBackStack(null)
+                    setReorderingAllowed(true)
                     replace(R.id.auth_main_frame, AuthSignupFragment())
                     commit()
                 }
