@@ -1,5 +1,7 @@
 package com.example.ssutudy.auth
 
+import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +20,7 @@ import retrofit2.Response
 class AuthActivity : AppCompatActivity() {
     companion object {
         //private final val BASE_URL = "https://skfk0135.stoplight.io/mocks/skfk0135/ssutudy-api-spec/4827703/"
-        private final val BASE_URL = "http://10.0.2.2:8000/"
+        private val BASE_URL = "http://10.0.2.2:8000/"
         val TAG = "Auth"
         lateinit private var mainFragment : AuthMainFragment
         lateinit private var retrofit: Retrofit
@@ -28,6 +30,7 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         mainFragment = AuthMainFragment()
 
@@ -67,6 +70,11 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun startCameraActivity() {
+        val intent = Intent(this, AuthCameraActivity::class.java)
+        startActivity(intent)
     }
 
     fun requestSignin(signinDto: SigninDto) {

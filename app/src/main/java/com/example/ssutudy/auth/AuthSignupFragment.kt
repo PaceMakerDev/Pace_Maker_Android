@@ -34,6 +34,7 @@ class AuthSignupFragment : Fragment() {
         setFocusChangeListener(view)
         view.auth_button_signin_from_signup.setOnClickListener(SignupClickListener(view))
 
+
         view.auth_button_student_card.setOnClickListener {
             //카메라 인식
         }
@@ -216,5 +217,6 @@ class AuthSignupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         authActivity = activity as AuthActivity
+        authActivity.startCameraActivity()
     }
 }
