@@ -158,10 +158,11 @@ class AuthSignupFragment : Fragment() {
                 val id = view.auth_edittext_signup_email.text.toString()
                 val name = view.auth_edittext_signup_name.text.toString()
                 val major = view.auth_edittext_signup_major.text.toString()
-                val password = view.auth_edittext_signup_pw.text.toString()
+                val password = authActivity.encryptSHA256(view.auth_edittext_signup_pw.text.toString())
                 val signupDto = SignUpDto(id, major, name, password)
                 authActivity.requestSignup(signupDto)
                 Log.d("Auth", "user input success")
+                Log.d("Auth", "pw : ${password}")
             }
         }
 

@@ -79,7 +79,7 @@ class AuthLoginFragment : Fragment() {
 
             if(isGood) {
                 val email = view.auth_login_edittext_email.text.toString()
-                val password = view.auth_login_edittext_pw.text.toString()
+                val password = authActivity.encryptSHA256(view.auth_login_edittext_pw.text.toString())
                 val signInDto = SigninDto(email, password)
                 authActivity.requestSignin(signInDto)
                 Log.d("Auth", "user login successful")

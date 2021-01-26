@@ -15,6 +15,8 @@
     <string name="auth_pw_check">비밀번호 확인</string>
     <string name="auth_student_card">학생증 인증</string>
     <string name="auth_signin">SIGN IN</string>
+    <string name="auth_signup_eng">SIGN UP</string>
+
     <string name="auth_error_blank_signup_name">학생증 인증을 해주세요</string>
     <string name="auth_error_blank_signup_major">학생증 인증을 해주세요</string>
     <string name="auth_error_blank_signup_email">이메일을 입력해 주세요</string>

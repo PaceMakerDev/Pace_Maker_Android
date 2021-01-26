@@ -146,7 +146,7 @@
             android:id="@+id/auth_button_signin_from_signup"
             android:background="@drawable/button_filled_maintheme"
             android:textSize="15sp"
-            android:text="@string/auth_signin"
+            android:text="@string/auth_signup_eng"
             android:textColor="#ffffff" />
 
 

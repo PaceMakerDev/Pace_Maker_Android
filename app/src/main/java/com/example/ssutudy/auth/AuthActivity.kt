@@ -15,12 +15,15 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.security.CryptoPrimitive
+import java.security.DigestException
+import java.security.MessageDigest
 
 
 class AuthActivity : AppCompatActivity() {
     companion object {
-        //private final val BASE_URL = "https://skfk0135.stoplight.io/mocks/skfk0135/ssutudy-api-spec/4827703/"
-        private val BASE_URL = "http://10.0.2.2:8000/"
+        //private final val BASE_URL = "http://13.124.194.199:8080/"
+        //private val BASE_URL = "http://10.0.2.2:8000/"
         val TAG = "Auth"
         lateinit private var mainFragment : AuthMainFragment
         lateinit private var retrofit: Retrofit
@@ -37,12 +40,16 @@ class AuthActivity : AppCompatActivity() {
         setFragment(AuthFragments.MAIN)
 
         // retorfit setting
+        /*
         val contentType = "application/json".toMediaType()
         retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
         service = retrofit.create(AuthService::class.java)
+
+         */
+        service = AuthServiceGenerator.createService(AuthService::class.java)
 
 
     }
@@ -95,12 +102,15 @@ class AuthActivity : AppCompatActivity() {
                     }
                     400 -> {
                         //요청바디형식이 잘못됨
+                        Log.d(TAG, "요청바디형식")
                     }
                     403 -> {
                         //아이디나 비밀번호 틀림
+                        Log.d(TAG, "아이디 비밀번호")
                     }
                     else -> {
                         //서버 다운
+                        Log.d(TAG, "404" + response.code())
                     }
                 }
             }
@@ -114,6 +124,7 @@ class AuthActivity : AppCompatActivity() {
 
     fun requestSignup(signupDto : SignUpDto) {
         val requestSignup = service.signupUser(signupDto)
+        Log.d(TAG, requestSignup.request().body.toString())
         requestSignup.enqueue(object : Callback<AuthResponseDto> {
             override fun onResponse(
                 call: Call<AuthResponseDto>,
@@ -130,22 +141,44 @@ class AuthActivity : AppCompatActivity() {
                             editor.putString("user_major", it.user.major)
                         }
                         editor.apply()
+                        Log.d(TAG, "signup succesfsul")
                     }
                     400 -> {
                         // 요청 바디 형식 오류
+                        Log.d(TAG, "요청바디형식 in signup")
+                        Log.d(TAG, response.raw().message)
                     }
                     409 -> {
                         //아이디 중복
+                        Log.d(TAG, "아이디 비밀번호")
                     }
                     else -> {
                         //서버다운
+                        Log.d(TAG, "error code : " + response.code())
                     }
                 }
             }
 
             override fun onFailure(call: Call<AuthResponseDto>, t: Throwable) {
                 //서버다운?
+                Log.d(TAG, t.localizedMessage)
             }
         })
+    }
+
+    fun encryptSHA256(pw : String) : String{
+        val hash : ByteArray
+        try {
+            val sh = MessageDigest.getInstance("SHA-256")
+            sh.update(pw.toByteArray())
+            hash = sh.digest()
+        } catch (e : CloneNotSupportedException) {
+            throw DigestException("couldn't make digest")
+        }
+        val sb = StringBuilder()
+        for(b in hash) {
+            sb.append(String.format("%02x", b))
+        }
+        return sb.toString()
     }
 }
