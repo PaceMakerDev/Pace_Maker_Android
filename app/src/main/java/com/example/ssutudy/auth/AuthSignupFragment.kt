@@ -32,7 +32,7 @@ class AuthSignupFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_auth_signup, container, false)
         initialSetUp(view)
         setFocusChangeListener(view)
-        view.auth_button_signin_from_signup.setOnClickListener(SignupClickListener(view))
+        view.auth_button_signup_with_input.setOnClickListener(SignupClickListener(view))
 
 
         view.auth_button_student_card.setOnClickListener {
@@ -61,7 +61,7 @@ class AuthSignupFragment : Fragment() {
         //마지막 패스워드 체크에서 확인 누를 시 바로 버튼 눌리게
         view.auth_edittext_signup_pw_check.setOnEditorActionListener { textView, i, keyEvent ->
             if(i == EditorInfo.IME_ACTION_DONE) {
-                view.auth_button_signin_from_signup.callOnClick()
+                view.auth_button_signup_with_input.callOnClick()
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -155,14 +155,12 @@ class AuthSignupFragment : Fragment() {
             validateInputs()
 
             if(isGood) {
-                val id = view.auth_edittext_signup_email.text.toString()
+                val email = view.auth_edittext_signup_email.text.toString()
                 val name = view.auth_edittext_signup_name.text.toString()
                 val major = view.auth_edittext_signup_major.text.toString()
                 val password = authActivity.encryptSHA256(view.auth_edittext_signup_pw.text.toString())
-                val signupDto = SignUpDto(id, major, name, password)
+                val signupDto = SignUpDto(email, major, name, password)
                 authActivity.requestSignup(signupDto)
-                Log.d("Auth", "user input success")
-                Log.d("Auth", "pw : ${password}")
             }
         }
 

@@ -143,7 +143,7 @@
         <Button
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:id="@+id/auth_button_signin_from_signup"
+            android:id="@+id/auth_button_signup_with_input"
             android:background="@drawable/button_filled_maintheme"
             android:textSize="15sp"
             android:text="@string/auth_signup_eng"

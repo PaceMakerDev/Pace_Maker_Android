@@ -94,11 +94,12 @@ class AuthActivity : AppCompatActivity() {
                         val editor = getSharedPreferences("auth", MODE_PRIVATE).edit()
                         response.body()!!.let {
                             editor.putString("access_token", it.accessToken)
-                            editor.putString("user_id", it.user.id)
+                            editor.putString("user_email", it.user.email)
                             editor.putString("user_name", it.user.name)
                             editor.putString("user_major", it.user.major)
                         }
                         editor.apply()
+                        Log.d(TAG, "login successful")
                     }
                     400 -> {
                         //요청바디형식이 잘못됨
@@ -124,7 +125,6 @@ class AuthActivity : AppCompatActivity() {
 
     fun requestSignup(signupDto : SignUpDto) {
         val requestSignup = service.signupUser(signupDto)
-        Log.d(TAG, requestSignup.request().body.toString())
         requestSignup.enqueue(object : Callback<AuthResponseDto> {
             override fun onResponse(
                 call: Call<AuthResponseDto>,
@@ -136,7 +136,7 @@ class AuthActivity : AppCompatActivity() {
                         val editor = getSharedPreferences("auth", MODE_PRIVATE).edit()
                         response.body()!!.let {
                             editor.putString("access_token", it.accessToken)
-                            editor.putString("user_id", it.user.id)
+                            editor.putString("user_email", it.user.email)
                             editor.putString("user_name", it.user.name)
                             editor.putString("user_major", it.user.major)
                         }
