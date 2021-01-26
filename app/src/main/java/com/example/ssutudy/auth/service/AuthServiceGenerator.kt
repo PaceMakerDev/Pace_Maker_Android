@@ -1,4 +1,4 @@
-package com.example.ssutudy.auth
+package com.example.ssutudy.auth.service
 
 import android.text.TextUtils
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory

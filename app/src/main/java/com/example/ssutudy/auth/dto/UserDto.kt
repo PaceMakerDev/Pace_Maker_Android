@@ -1,4 +1,4 @@
-package com.example.ssutudy.auth
+package com.example.ssutudy.auth.dto
 
 import kotlinx.serialization.Serializable
 
