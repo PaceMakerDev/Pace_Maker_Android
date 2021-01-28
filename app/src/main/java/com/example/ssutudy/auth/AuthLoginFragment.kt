@@ -1,7 +1,7 @@
 package com.example.ssutudy.auth
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +12,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
+import com.example.ssutudy.study.MainActivity
 import kotlinx.android.synthetic.main.fragment_auth_login.*
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
 
@@ -76,6 +77,8 @@ class AuthLoginFragment : Fragment() {
         override fun onClick(p0: View?) {
             resetInputs()
             validateInputs()
+
+            startActivity(Intent(context, MainActivity::class.java))
 
             if(isGood) {
                 val email = view.auth_login_edittext_email.text.toString()

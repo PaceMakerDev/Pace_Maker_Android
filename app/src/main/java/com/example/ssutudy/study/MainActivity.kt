@@ -1,4 +1,4 @@
-package com.example.ssutudy
+package com.example.ssutudy.study
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.ssutudy.R
 import com.example.ssutudy.auth.AuthActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
+            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+        ))
 
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -31,5 +32,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
         }
+
+
+
+
     }
 }
