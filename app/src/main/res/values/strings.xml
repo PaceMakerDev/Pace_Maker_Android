@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Ssutudy</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">홈</string>
+    <string name="title_mystudy">내 스터디</string>
+    <string name="title_settings">설정</string>
 
     <!-- Auth -->
     <string name="auth_missing_info">아이디 혹은 비밀번호를 잊으셨나요?</string>

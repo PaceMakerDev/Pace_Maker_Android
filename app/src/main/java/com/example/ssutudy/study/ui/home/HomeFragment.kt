@@ -1,4 +1,4 @@
-package com.example.ssutudy.study
+package com.example.ssutudy.study.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
-import com.github.mikephil.charting.animation.Easing
+import com.example.ssutudy.study.dto.StudyLog
+import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -14,7 +15,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
-
+    private lateinit var pieChart : PieChart
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -41,12 +42,22 @@ class HomeFragment : Fragment() {
         years.add("700f")
 
         val data = PieData(dataset)
-        val pieChart = view.chart
+        pieChart = view.chart
         pieChart.data = data
         dataset.colors = ColorTemplate.COLORFUL_COLORS.asList()
         //pieChart.animateXY(1000, 1000)
         pieChart.animateXY(1000, 1000)
+        //pieChart.visibility = View.GONE
 
         return view
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        pieChart.visibility = View.GONE
+    }
+
+    fun displayChart(studyLog: StudyLog) {
+
     }
 }

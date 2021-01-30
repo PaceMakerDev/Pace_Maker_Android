@@ -1,4 +1,4 @@
-package com.example.ssutudy.study.ui.notifications
+package com.example.ssutudy.study.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

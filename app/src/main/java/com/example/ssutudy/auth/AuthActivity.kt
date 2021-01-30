@@ -2,20 +2,15 @@ package com.example.ssutudy.auth
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
 import com.example.ssutudy.auth.enums.AuthFragments
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
 import retrofit2.Retrofit
-import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.security.CryptoPrimitive
 import java.security.DigestException
 import java.security.MessageDigest
 
