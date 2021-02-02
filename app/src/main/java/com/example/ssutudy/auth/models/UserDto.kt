@@ -1,12 +1,11 @@
 package com.example.ssutudy.auth.models
 
-
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SignUpDto (
-    val email : String?,
-    val major : String?,
+data class UserDto (
+    val id : Int?,
     val name : String?,
-    val password : String?
+    val major : String?,
+    val email : String?
 )

@@ -1,4 +1,4 @@
-package com.example.ssutudy.ui.notifications
+package com.example.ssutudy.study.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.ssutudy.R
 
-class NotificationsFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 

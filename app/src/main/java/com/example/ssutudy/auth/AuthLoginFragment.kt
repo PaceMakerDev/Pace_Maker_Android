@@ -11,7 +11,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
+<<<<<<< HEAD
 import com.example.ssutudy.auth.dto.SigninDto
+=======
+import com.example.ssutudy.auth.models.SigninDto
+import com.example.ssutudy.util.AuthValidator
+>>>>>>> feature2/home
 import kotlinx.android.synthetic.main.fragment_auth_login.*
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
 
@@ -77,6 +82,8 @@ class AuthLoginFragment : Fragment() {
             resetInputs()
             validateInputs()
 
+            //startActivity(Intent(context, MainActivity::class.java))
+
             if(isGood) {
                 val email = view.auth_login_edittext_email.text.toString()
                 val password = authActivity.encryptSHA256(view.auth_login_edittext_pw.text.toString())
@@ -127,5 +134,7 @@ class AuthLoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         authActivity = activity as AuthActivity
     }
+
+
 
 }

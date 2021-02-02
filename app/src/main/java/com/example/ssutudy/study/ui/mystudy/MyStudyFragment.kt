@@ -1,4 +1,4 @@
-package com.example.ssutudy.ui.dashboard
+package com.example.ssutudy.study.ui.mystudy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.ssutudy.R
 
-class DashboardFragment : Fragment() {
+class MyStudyFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
 

@@ -12,7 +12,12 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
+<<<<<<< HEAD
 import com.example.ssutudy.auth.dto.SignUpDto
+=======
+import com.example.ssutudy.auth.models.SignUpDto
+import com.example.ssutudy.util.AuthValidator
+>>>>>>> feature2/home
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.view.*
@@ -203,7 +208,7 @@ class AuthSignupFragment : Fragment() {
             for(i in inputs.indices) {
                 inputs.get(i).background = ResourcesCompat.getDrawable(resources, R.drawable.editview_auth_input, null)
                 inputs.get(i).hint = strings.get(i)
-                inputs.get(i).setHintTextColor(ResourcesCompat.getColor(resources, R.color.hint, null))
+                inputs.get(i).setHintTextColor(ResourcesCompat.getColor(resources, R.color.gray, null))
                 inputs.get(i).setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
             }
             for(message in messages) {
