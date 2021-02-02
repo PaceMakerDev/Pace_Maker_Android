@@ -1,5 +1,8 @@
 package com.example.ssutudy.auth
 
+import com.example.ssutudy.auth.models.AuthResponseDto
+import com.example.ssutudy.auth.models.SignUpDto
+import com.example.ssutudy.auth.models.SigninDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

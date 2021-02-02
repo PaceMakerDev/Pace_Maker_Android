@@ -2,21 +2,15 @@ package com.example.ssutudy.study
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.findFragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.example.ssutudy.R
-import com.example.ssutudy.auth.AuthServiceGenerator
+import com.example.ssutudy.util.service.ServiceGenerator
 import com.example.ssutudy.study.dto.StudyLog
 import com.example.ssutudy.study.enum.MainFragments
 import com.example.ssutudy.study.ui.home.HomeFragment
 import com.example.ssutudy.study.ui.mystudy.MyStudyFragment
 import com.example.ssutudy.study.ui.settings.SettingsFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         ))
 
          */
-        studyService = AuthServiceGenerator.createService(StudyService::class.java)
+        studyService = ServiceGenerator.createService(StudyService::class.java)
 
         //setupActionBarWithNavController(navController, appBarConfiguration)
         //navView.setupWithNavController(navController)

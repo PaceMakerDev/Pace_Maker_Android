@@ -7,6 +7,12 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
 import com.example.ssutudy.auth.enums.AuthFragments
+import com.example.ssutudy.auth.models.AuthResponseDto
+import com.example.ssutudy.auth.models.SignUpDto
+import com.example.ssutudy.auth.models.SigninDto
+import com.example.ssutudy.study.MainActivity
+import com.example.ssutudy.util.DialogUtil
+import com.example.ssutudy.util.service.ServiceGenerator
 import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,14 +22,12 @@ import java.security.MessageDigest
 
 
 class AuthActivity : AppCompatActivity() {
-    companion object {
-        //private final val BASE_URL = "http://13.124.194.199:8080/"
-        //private val BASE_URL = "http://10.0.2.2:8000/"
-        val TAG = "Auth"
-        lateinit private var mainFragment : AuthMainFragment
-        lateinit private var retrofit: Retrofit
-        lateinit private var service : AuthService
-    }
+    val TAG = "Auth"
+    lateinit private var mainFragment : AuthMainFragment
+    lateinit private var retrofit: Retrofit
+    lateinit private var service : AuthService
+    lateinit private var authSignupFragment : AuthSignupFragment
+    lateinit private var authLoginFragment: AuthLoginFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +48,7 @@ class AuthActivity : AppCompatActivity() {
         service = retrofit.create(AuthService::class.java)
 
          */
-        service = AuthServiceGenerator.createService(AuthService::class.java)
-
+        service = ServiceGenerator.createService(AuthService::class.java)
 
     }
 
@@ -60,14 +63,16 @@ class AuthActivity : AppCompatActivity() {
                     setCustomAnimations(R.anim.from_right_to_center, R.anim.from_center_to_left, R.anim.from_left_to_center, R.anim.from_center_to_right)
                     addToBackStack(null)
                     setReorderingAllowed(true)
-                    replace(R.id.auth_main_frame, AuthLoginFragment())
+                    authLoginFragment = AuthLoginFragment()
+                    replace(R.id.auth_main_frame, authLoginFragment)
                     commit()
                 }
                 AuthFragments.SIGNUP -> {
                     setCustomAnimations(R.anim.from_right_to_center, R.anim.from_center_to_left, R.anim.from_left_to_center, R.anim.from_center_to_right)
                     addToBackStack(null)
                     setReorderingAllowed(true)
-                    replace(R.id.auth_main_frame, AuthSignupFragment())
+                    authSignupFragment = AuthSignupFragment()
+                    replace(R.id.auth_main_frame, authSignupFragment)
                     commit()
                 }
             }
@@ -92,28 +97,29 @@ class AuthActivity : AppCompatActivity() {
                             editor.putString("user_email", it.user.email)
                             editor.putString("user_name", it.user.name)
                             editor.putString("user_major", it.user.major)
+                            editor.putInt("user_id", it.user.id!!)
                         }
                         editor.apply()
                         Log.d(TAG, "login successful")
+                        startActivity(Intent(applicationContext, MainActivity::class.java))
                     }
                     400 -> {
                         //요청바디형식이 잘못됨
                         Log.d(TAG, "요청바디형식")
                     }
-                    403 -> {
+                    404 -> {
                         //아이디나 비밀번호 틀림
-                        Log.d(TAG, "아이디 비밀번호")
+                        DialogUtil.showAlertDialog(authLoginFragment.requireContext(), "로그인 오류", "아이디 혹은 비밀번호가 일치하지 않습니다")
+
                     }
                     else -> {
-                        //서버 다운
-                        Log.d(TAG, "404" + response.code())
+                        DialogUtil.showAlertDialog(authLoginFragment.requireContext(), "서버 오류", "서버가 응답하지 않습니다")
                     }
                 }
             }
 
             override fun onFailure(call: Call<AuthResponseDto>, t: Throwable) {
-                Log.d(TAG, "onFailure")
-                Log.d(TAG, t.localizedMessage)
+                DialogUtil.showAlertDialog(authLoginFragment.requireContext(), "서버 오류", "서버가 응답하지 않습니다")
             }
         })
     }
@@ -134,9 +140,11 @@ class AuthActivity : AppCompatActivity() {
                             editor.putString("user_email", it.user.email)
                             editor.putString("user_name", it.user.name)
                             editor.putString("user_major", it.user.major)
+                            editor.putInt("user_id", it.user.id!!)
                         }
                         editor.apply()
                         Log.d(TAG, "signup succesfsul")
+                        startActivity(Intent(applicationContext, MainActivity::class.java))
                     }
                     400 -> {
                         // 요청 바디 형식 오류

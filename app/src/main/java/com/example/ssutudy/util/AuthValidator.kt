@@ -1,4 +1,4 @@
-package com.example.ssutudy.auth
+package com.example.ssutudy.util
 
 class AuthValidator {
     companion object {

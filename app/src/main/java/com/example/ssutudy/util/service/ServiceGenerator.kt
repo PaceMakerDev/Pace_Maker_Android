@@ -1,4 +1,4 @@
-package com.example.ssutudy.auth
+package com.example.ssutudy.util.service
 
 import android.text.TextUtils
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -7,7 +7,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
-class AuthServiceGenerator {
+class ServiceGenerator {
     companion object {
         private final val BASE_URL = "http://13.124.194.199:8080/"
         //private final val BASE_URL = "http://10.0.2.2:8000/"
@@ -24,7 +24,7 @@ class AuthServiceGenerator {
 
         fun <S> createService(serviceClass : Class<S>, authToken : String?) : S{
             if(!TextUtils.isEmpty(authToken)) {
-                val interceptor = AuthInterceptor("Bearer " + authToken)
+                val interceptor = RequestInterceptor("Bearer " + authToken)
 
                 if(!httpClient.interceptors().contains(interceptor)) {
                     httpClient.addInterceptor(interceptor)
