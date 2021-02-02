@@ -1,9 +1,7 @@
-<<<<<<< HEAD:app/src/main/java/com/example/ssutudy/auth/service/AuthServiceGenerator.kt
-package com.example.ssutudy.auth.service
-=======
 package com.example.ssutudy.util.service
->>>>>>> feature2/home:app/src/main/java/com/example/ssutudy/util/service/ServiceGenerator.kt
 
+
+import RequestInterceptor
 import android.text.TextUtils
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json

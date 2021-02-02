@@ -5,7 +5,6 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
-import com.example.ssutudy.util.service.ServiceGenerator
 import com.example.ssutudy.study.models.StudyLog
 import com.example.ssutudy.study.enum.MainFragments
 import com.example.ssutudy.study.ui.home.HomeFragment
