@@ -6,27 +6,21 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
-import com.example.ssutudy.auth.dto.AuthResponseDto
-import com.example.ssutudy.auth.dto.SignUpDto
-import com.example.ssutudy.auth.dto.SigninDto
 import com.example.ssutudy.auth.enums.AuthFragments
-<<<<<<< HEAD
-import com.example.ssutudy.auth.service.AuthService
-import com.example.ssutudy.auth.service.AuthServiceGenerator
-=======
 import com.example.ssutudy.auth.models.AuthResponseDto
 import com.example.ssutudy.auth.models.SignUpDto
 import com.example.ssutudy.auth.models.SigninDto
+import com.example.ssutudy.auth.service.AuthService
 import com.example.ssutudy.study.MainActivity
 import com.example.ssutudy.util.DialogUtil
 import com.example.ssutudy.util.service.ServiceGenerator
->>>>>>> feature2/home
 import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.security.DigestException
 import java.security.MessageDigest
+
 
 
 class AuthActivity : AppCompatActivity() {

@@ -12,12 +12,8 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
-<<<<<<< HEAD
-import com.example.ssutudy.auth.dto.SignUpDto
-=======
 import com.example.ssutudy.auth.models.SignUpDto
 import com.example.ssutudy.util.AuthValidator
->>>>>>> feature2/home
 import kotlinx.android.synthetic.main.fragment_auth_login.view.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.*
 import kotlinx.android.synthetic.main.fragment_auth_signup.view.*

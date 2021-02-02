@@ -1,7 +1,6 @@
 package com.example.ssutudy.util.service
 
 
-import RequestInterceptor
 import android.text.TextUtils
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json

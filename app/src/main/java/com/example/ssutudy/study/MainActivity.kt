@@ -10,6 +10,7 @@ import com.example.ssutudy.study.enum.MainFragments
 import com.example.ssutudy.study.ui.home.HomeFragment
 import com.example.ssutudy.study.ui.mystudy.MyStudyFragment
 import com.example.ssutudy.study.ui.settings.SettingsFragment
+import com.example.ssutudy.util.service.ServiceGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
