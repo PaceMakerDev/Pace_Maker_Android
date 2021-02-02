@@ -11,5 +11,4 @@ class RequestInterceptor(val authToken : String) : Interceptor {
         val request = builder.build()
         return chain.proceed(request)
     }
-
 }

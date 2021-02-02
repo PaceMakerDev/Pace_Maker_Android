@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.ssutudy.R
-import com.example.ssutudy.study.dto.StudyLog
+import com.example.ssutudy.study.models.StudyLog
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
