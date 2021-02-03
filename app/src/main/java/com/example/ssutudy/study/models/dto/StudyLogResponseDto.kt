@@ -1,5 +1,6 @@
-package com.example.ssutudy.study.models
+package com.example.ssutudy.study.models.dto
 
+import com.example.ssutudy.study.models.StudyLog
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -3,7 +3,7 @@ package com.example.ssutudy.auth.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserDto (
+data class User (
     val id : Int?,
     val name : String?,
     val major : String?,

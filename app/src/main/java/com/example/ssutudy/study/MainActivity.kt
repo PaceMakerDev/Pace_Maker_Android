@@ -6,9 +6,8 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
-import com.example.ssutudy.study.models.StudyLog
 import com.example.ssutudy.study.enum.MainFragments
-import com.example.ssutudy.study.models.StudyLogResponseDto
+import com.example.ssutudy.study.models.dto.StudyLogResponseDto
 import com.example.ssutudy.study.ui.home.HomeFragment
 import com.example.ssutudy.study.ui.mystudy.MyStudyFragment
 import com.example.ssutudy.study.ui.settings.SettingsFragment
@@ -32,19 +31,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        /*
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_mystudy, R.id.navigation_settings
-        ))
-
-         */
         studyService = ServiceGenerator.createService(StudyService::class.java)
 
-        //setupActionBarWithNavController(navController, appBarConfiguration)
-        //navView.setupWithNavController(navController)
 
         homeFragment = HomeFragment()
         myStudyFragment = MyStudyFragment()
@@ -60,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         val request = studyService.requestStudyLog(originDate, dateFormat.format(today))
         request.enqueue(object : Callback<StudyLogResponseDto> {
             override fun onResponse(call: Call<StudyLogResponseDto>, response: Response<StudyLogResponseDto>) {
+                Log.d("Auth", "onResponse : ${response.code()}")
+                Log.d("Auth", "id : ${response.body()!!.studyLogs.get(0).study!!.id}, limit : ${response.body()!!.studyLogs.get(0).study!!.participantLimit}")
                 when(response.code()) {
                     200 -> {
 
@@ -71,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<StudyLogResponseDto>, t: Throwable) {
-                Log.d("Auth", t.localizedMessage)
+                Log.d("Auth", "onFailure : ${t.localizedMessage}")
             }
         })
     }
