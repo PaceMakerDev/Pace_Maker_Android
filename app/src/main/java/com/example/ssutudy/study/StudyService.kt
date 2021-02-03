@@ -1,6 +1,7 @@
 package com.example.ssutudy.study
 
 import com.example.ssutudy.study.models.StudyLog
+import com.example.ssutudy.study.models.StudyLogResponseDto
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,7 +11,7 @@ interface StudyService {
     fun requestStudyLog(
         @Query("from") startDate : String,
         @Query("to") endDate : String
-    ) : Call<StudyLog>
+    ) : Call<StudyLogResponseDto>
 
     @GET("/v1/study-logs")
     fun requestStudyLogByStudyId(

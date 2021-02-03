@@ -10,8 +10,8 @@ import retrofit2.Retrofit
 
 class ServiceGenerator {
     companion object {
-        private final val BASE_URL = "http://13.124.194.199:8080/"
-        //private final val BASE_URL = "http://10.0.2.2:8000/"
+        //private final val BASE_URL = "http://13.124.194.199:8080/"
+        private final val BASE_URL = "http://10.0.2.2:8000/"
         val httpClient = OkHttpClient.Builder()
         private val builder = Retrofit.Builder()
             .baseUrl(BASE_URL)

@@ -1,12 +1,14 @@
 package com.example.ssutudy.study
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ssutudy.R
 import com.example.ssutudy.study.models.StudyLog
 import com.example.ssutudy.study.enum.MainFragments
+import com.example.ssutudy.study.models.StudyLogResponseDto
 import com.example.ssutudy.study.ui.home.HomeFragment
 import com.example.ssutudy.study.ui.mystudy.MyStudyFragment
 import com.example.ssutudy.study.ui.settings.SettingsFragment
@@ -50,13 +52,14 @@ class MainActivity : AppCompatActivity() {
         setFragment(MainFragments.HOME)
 
         navView.setOnNavigationItemSelectedListener(MainNavigationItemSelectedListener())
+        requestTotalStudyLog()
     }
 
     fun requestTotalStudyLog() {
         val today = Date(System.currentTimeMillis())
         val request = studyService.requestStudyLog(originDate, dateFormat.format(today))
-        request.enqueue(object : Callback<StudyLog> {
-            override fun onResponse(call: Call<StudyLog>, response: Response<StudyLog>) {
+        request.enqueue(object : Callback<StudyLogResponseDto> {
+            override fun onResponse(call: Call<StudyLogResponseDto>, response: Response<StudyLogResponseDto>) {
                 when(response.code()) {
                     200 -> {
 
@@ -67,8 +70,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<StudyLog>, t: Throwable) {
-
+            override fun onFailure(call: Call<StudyLogResponseDto>, t: Throwable) {
+                Log.d("Auth", t.localizedMessage)
             }
         })
     }
