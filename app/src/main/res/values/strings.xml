@@ -4,8 +4,13 @@
     <string name="title_mystudy">내 스터디</string>
     <string name="title_settings">설정</string>
 
+    <!-- Common -->
+    <string name="app_name_ko">페이스메이커</string>
+
     <!-- Auth -->
     <string name="auth_missing_info">아이디 혹은 비밀번호를 잊으셨나요?</string>
+    <string name="auth_title_message">당신의 곁에서 공부를 도와주는</string>
+
     <string name="auth_login">로그인</string>
     <string name="auth_signup">회원가입</string>
     <string name="auth_email">이메일</string>
