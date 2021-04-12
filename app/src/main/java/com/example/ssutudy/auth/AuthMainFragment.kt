@@ -25,13 +25,6 @@ class AuthMainFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_auth_main, container, false)
 
-        val display = requireContext().display
-        val size = Point()
-        display!!.getRealSize(size)
-        val width = size.x
-        val height = size.y
-        Log.d(TAG, "width :${width}, height : ${height}")
-
 
         view.auth_button_login.setOnClickListener {
             authActivity.setFragment(AuthFragments.LOGIN)

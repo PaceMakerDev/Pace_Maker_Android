@@ -130,7 +130,4 @@ class AuthLoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         authActivity = activity as AuthActivity
     }
-
-
-
 }
