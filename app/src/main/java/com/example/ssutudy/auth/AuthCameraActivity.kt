@@ -86,10 +86,10 @@ class AuthCameraActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        val cameraProviderFeature = ProcessCameraProvider.getInstance(this)
 
-        cameraProviderFuture.addListener(Runnable {
-            val cameraProvider : ProcessCameraProvider = cameraProviderFuture.get()
+        cameraProviderFeature.addListener(Runnable {
+            val cameraProvider : ProcessCameraProvider = cameraProviderFeature.get()
 
             val preview = Preview.Builder()
                 .build()

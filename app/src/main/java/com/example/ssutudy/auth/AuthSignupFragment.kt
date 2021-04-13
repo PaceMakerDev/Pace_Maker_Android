@@ -31,18 +31,18 @@ class AuthSignupFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_auth_signup, container, false)
+        rootView= inflater.inflate(R.layout.fragment_auth_signup, container, false)
         initialSetUp()
         setFocusChangeListener()
-        view.auth_button_signup_with_input.setOnClickListener(SignupClickListener())
+        rootView.auth_button_signup_with_input.setOnClickListener(SignupClickListener())
 
 
-        view.auth_button_student_card.setOnClickListener {
+        rootView.auth_button_student_card.setOnClickListener {
             //카메라 인식
         }
 
-        rootView = view
-        return view
+
+        return return rootView
     }
 
     fun initialSetUp() {
