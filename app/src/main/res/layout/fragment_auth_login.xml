@@ -24,7 +24,6 @@
             android:id="@+id/auth_title_login"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/auth_login"
-
             android:textAlignment="center"
             android:textSize="20sp"
             android:textColor="@color/title" />
